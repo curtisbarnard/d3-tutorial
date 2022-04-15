@@ -11,10 +11,24 @@ const svg = d3.select('svg')
 .attr('width', svgWidth)
 .attr('height', svgHeight)
 
+// set xScale
+const xScale = d3.scaleLinear()
+.domain([0, d3.max(dataset)])
+.range([0,svgWidth])
+
 // set yScale
 const yScale = d3.scaleLinear()
 .domain([0, d3.max(dataset)])
-.range([0,svgHeight - 10])
+.range([0,svgHeight])
+
+// Set x-axis
+const x_axis = d3.axisBottom().scale(xScale)
+const xAxisTranslate = svgHeight - 20
+svg.append('g').attr('transform', 'translate(50, ' + xAxisTranslate + ')').call(x_axis)
+
+// Set y-axis
+const y_axis = d3.axisLeft().scale(yScale)
+svg.append('g').attr('transform', 'translate(50, 10)').call(y_axis)
 
 // add data to svg
 const barChart = svg.selectAll('rect')
