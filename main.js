@@ -11,16 +11,21 @@ const svg = d3.select('svg')
 .attr('width', svgWidth)
 .attr('height', svgHeight)
 
+// set yScale
+const yScale = d3.scaleLinear()
+.domain([0, d3.max(dataset)])
+.range([0,svgHeight - 10])
+
 // add data to svg
 const barChart = svg.selectAll('rect')
 .data(dataset)
 .enter()
 .append('rect')
 .attr('y', function(d) {
-    return svgHeight - d
+    return svgHeight - yScale(d)
 })
 .attr('height', function(d) {
-    return d
+    return yScale(d)
 })
 .attr('width', barWidth - barPadding)
 .attr('transform', function(d,i) {
