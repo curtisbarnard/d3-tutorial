@@ -27,3 +27,19 @@ const barChart = svg.selectAll('rect')
     const translate = [barWidth * i, 0]
     return 'translate(' + translate + ')'
 })
+
+// add labels to bar chart
+const text = svg.selectAll('text')
+.data(dataset)
+.enter()
+.append('text')
+.text(function(d) {
+    return d
+})
+.attr('y', function(d) {
+    return svgHeight - d - 2
+})
+.attr('x', function(d, i) {
+    return barWidth * i
+})
+.attr('fill', '#000000')
